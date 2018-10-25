@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hwy.ninephotolayout.engine.GlidePhotoEngine;
 import com.hwy.ninephotolayout.entity.NoticeBean;
@@ -71,8 +72,17 @@ public class ListActivity extends AppCompatActivity {
                 viewHolder.tvName.setText(bean.getName());
                 viewHolder.tvContent.setText(bean.getContent());
 
-                viewHolder.photoLayout.setPhotoEngine(new GlidePhotoEngine());
+                if (viewHolder.photoLayout.getPhotoEngine() == null) {
+                    viewHolder.photoLayout.setPhotoEngine(new GlidePhotoEngine());
+                }
                 viewHolder.photoLayout.addPhotos(bean.getPhotos());
+
+                viewHolder.photoLayout.setOnItemClickListener(new NinePhotoLayout.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(int position, View view, List<String> urls) {
+                        showToast("position = " + position);
+                    }
+                });
 
                 return convertView;
             }
@@ -138,6 +148,10 @@ public class ListActivity extends AppCompatActivity {
             mList.add(bean);
         }
 
+    }
+
+    private void showToast(String content) {
+        Toast.makeText(this, content, Toast.LENGTH_SHORT).show();
     }
 
 }

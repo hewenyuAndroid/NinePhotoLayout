@@ -66,25 +66,25 @@ public class NormalActivity extends AppCompatActivity {
         mPhotoLayout1.setOnItemClickListener(new NinePhotoLayout.OnItemClickListener() {
             @Override
             public void onItemClick(int position, View view, List<String> urls) {
-                LogUtil.e("Layout1 position = " + position);
+                showToast("position = " + position);
             }
         });
         mPhotoLayout2.setOnItemClickListener(new NinePhotoLayout.OnItemClickListener() {
             @Override
             public void onItemClick(int position, View view, List<String> urls) {
-                LogUtil.e("Layout2 position = " + position);
+                showToast("position = " + position);
             }
         });
         mPhotoLayout3.setOnItemClickListener(new NinePhotoLayout.OnItemClickListener() {
             @Override
             public void onItemClick(int position, View view, List<String> urls) {
-                LogUtil.e("Layout3 position = " + position);
+                showToast("position = " + position);
             }
         });
         mPhotoLayout4.setOnItemClickListener(new NinePhotoLayout.OnItemClickListener() {
             @Override
             public void onItemClick(int position, View view, List<String> urls) {
-                LogUtil.e("Layout4 position = " + position);
+                showToast("position = " + position);
             }
         });
     }

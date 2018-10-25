@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hwy.ninephotolayout.engine.GlidePhotoEngine;
 import com.hwy.ninephotolayout.entity.NoticeBean;
@@ -71,7 +72,7 @@ public class RecyclerActivity extends AppCompatActivity {
                 photoLayout.setOnItemClickListener(new NinePhotoLayout.OnItemClickListener() {
                     @Override
                     public void onItemClick(int position, View view, List<String> urls) {
-
+                        showToast("position = " + position);
                     }
                 });
 
@@ -160,6 +161,10 @@ public class RecyclerActivity extends AppCompatActivity {
             mList.add(bean);
         }
 
+    }
+
+    private void showToast(String content) {
+        Toast.makeText(this, content, Toast.LENGTH_SHORT).show();
     }
 
 }
