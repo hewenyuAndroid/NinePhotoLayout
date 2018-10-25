@@ -26,7 +26,7 @@
             android:layout_height="300dp"
             android:layout_marginTop="30dp"
             android:background="#FFFFFF"
-            app:photoSpanSize="3dp" />
+            app:photoSpanSize="3dp"/>
 
         <com.hwy.photolayout.NinePhotoLayout
             android:id="@+id/photoLayout3"

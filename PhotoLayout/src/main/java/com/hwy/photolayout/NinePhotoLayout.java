@@ -333,6 +333,41 @@ public class NinePhotoLayout extends FrameLayout {
         return mPhotoEngine;
     }
 
+    public void setItemSpan(int itemSpan) {
+        mItemSpan = itemSpan;
+        requestLayout();
+    }
+
+    public int getItemSpan() {
+        return mItemSpan;
+    }
+
+    public void setSinglePhotoRatio(float ratio) {
+        if (ratio <= 0) {
+            ratio = 0.1f;
+        } else if (ratio >= 1) {
+            ratio = 0.9f;
+        }
+        this.mChildMaxRatio = ratio;
+        maxSize = 0;
+        requestLayout();
+    }
+
+    public float getSinglePhotoRatio() {
+        return mChildMaxRatio;
+    }
+
+    public void setPhotoClickDarken(boolean photoClickDarken) {
+        this.photoClickDarken = photoClickDarken;
+        int childCount = getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            View view = getChildAt(i);
+            if (view instanceof RatioImageView) {
+                ((RatioImageView) view).setArrowDarken(photoClickDarken);
+            }
+        }
+    }
+
     // region ------------------ 点击事件回调监听 -----------------------
 
     private OnItemClickListener mOnItemClickListener;

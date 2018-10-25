@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
-import com.hwy.log.LogUtil;
 import com.hwy.ninephotolayout.engine.GlidePhotoEngine;
 import com.hwy.photolayout.NinePhotoLayout;
 
@@ -32,7 +31,6 @@ public class NormalActivity extends AppCompatActivity {
         mPhotoLayout2.setPhotoEngine(new GlidePhotoEngine());
         mPhotoLayout3.setPhotoEngine(new GlidePhotoEngine());
         mPhotoLayout4.setPhotoEngine(new GlidePhotoEngine());
-
 
         // 横向
         String url1 = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1540445787345&di=6d2e585c1720e9b9f229803400b82fdb&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2Fa%2F58423377d8fc2.jpg";
