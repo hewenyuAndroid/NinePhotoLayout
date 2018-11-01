@@ -22,7 +22,8 @@
         </activity>
         <activity android:name=".NormalActivity" />
         <activity android:name=".ListActivity" />
-        <activity android:name=".RecyclerActivity"></activity>
+        <activity android:name=".RecyclerActivity" />
+        <activity android:name=".TakePhotoActivity"></activity>
     </application>
 
 </manifest>

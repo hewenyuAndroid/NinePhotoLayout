@@ -10,4 +10,19 @@
         <attr name="singlePhotoRatio" format="float" />
     </declare-styleable>
 
+    <declare-styleable name="TakePhotoLayout">
+        <attr name="plItemSpan" format="dimension|reference" />
+        <attr name="plColumn" format="integer" />
+        <attr name="plEmptyPlaceholder" format="reference" />
+        <attr name="plPlaceholder" format="reference" />
+        <attr name="plMaxCount" format="integer" />
+        <attr name="plCrossBgColor" format="color|reference" />
+        <attr name="plCrossRadius" format="dimension|reference" />
+        <attr name="plCrossLength" format="dimension|reference" />
+        <attr name="plCrossSize" format="dimension|reference" />
+        <attr name="plCrossColor" format="color|reference" />
+        <attr name="plOffsetX" format="dimension|reference" />
+        <attr name="plOffsetY" format="dimension|reference" />
+    </declare-styleable>
+
 </resources>

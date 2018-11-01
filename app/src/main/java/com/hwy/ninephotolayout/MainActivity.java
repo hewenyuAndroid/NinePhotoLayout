@@ -25,4 +25,8 @@ public class MainActivity extends AppCompatActivity {
     public void inRecyclerView(View view) {
         startActivity(new Intent(this, RecyclerActivity.class));
     }
+
+    public void takePhoto(View view) {
+        startActivity(new Intent(this, TakePhotoActivity.class));
+    }
 }
