@@ -24,7 +24,13 @@ import java.util.List;
  */
 public class TakePhotoLayout extends ViewGroup {
 
+    /**
+     * 默认增加图片的占位图
+     */
     private static final int DEFAULT_PLACEHOLDER = R.drawable.icon_take_photo;
+    /**
+     * 默认没有图片时候的占位图
+     */
     private static final int DEFAULT_EMPTY_PLACEHOLDER = R.drawable.icon_take_photo_empty;
 
     /**
@@ -439,15 +445,10 @@ public class TakePhotoLayout extends ViewGroup {
             if (mPhotoEngine != null) {
                 mPhotoEngine.loadImageMulti(getChildCount(), imageView, photos.get(i));
             }
-            // 更新删除按钮的区域
-            updateTouchRanges();
-            // 更新增加图片按钮是否显示及图标
-            updatePlaceholder();
-            invalidate();
+
         }
 
-        // 更新点击事件
-        initListener();
+        setUpdate();
     }
 
     /**
@@ -489,12 +490,20 @@ public class TakePhotoLayout extends ViewGroup {
     private void removeView(int position) {
         // 删除指定位置上的View
         removeViewAt(position);
+        // 移除对应的图片路径
+        mPhotoPaths.remove(position);
+        setUpdate();
+
+    }
+
+    /**
+     * 设置更新
+     */
+    private void setUpdate() {
         // 更新触摸按钮的范围
         updateTouchRanges();
         // 更新增加图片是否显示以及占位图
         updatePlaceholder();
-        // 移除对应的图片路径
-        mPhotoPaths.remove(position);
         // 更新监听事件
         initListener();
         invalidate();
@@ -511,19 +520,148 @@ public class TakePhotoLayout extends ViewGroup {
 
     // region ------------ get/set -------------
 
+    /**
+     * 设置最大数量
+     *
+     * @param maxCount
+     */
     public void setMaxCount(int maxCount) {
         this.mMaxCount = maxCount;
         int count = getChildCount() - 1;
-        for (int i = 0; i < count; i++) {
-            if (i >= maxCount) {
-                removeView(i);
-            }
+        for (int i = count - 1; i >= mMaxCount; i--) {
+            mPhotoPaths.remove(i);
+            removeViewAt(i);
         }
+        setUpdate();
+    }
+
+    /**
+     * 获取最大数量
+     *
+     * @return
+     */
+    public int getMaxCount() {
+        return this.mMaxCount;
+    }
+
+    /**
+     * 设置列数
+     *
+     * @param column
+     */
+    public void setColumn(int column) {
+        this.mColumn = column;
+        mItemSize = 0;
         requestLayout();
     }
 
-    public int getMaxCount() {
-        return this.mMaxCount;
+    public int getColumn() {
+        return this.mColumn;
+    }
+
+    /**
+     * 获取Item的间距
+     *
+     * @param itemSpan
+     */
+    public void setItemSpan(int itemSpan) {
+        this.mItemSpan = itemSpan;
+        mItemSize = 0;
+        requestLayout();
+    }
+
+    public int getItemSpan() {
+        return this.mItemSpan;
+    }
+
+    /**
+     * 设置清除按钮的背景色
+     *
+     * @param color
+     */
+    public void setCrossBgColor(int color) {
+        this.mCrossBgColor = color;
+        invalidate();
+    }
+
+    public int getCrossBgColor() {
+        return this.mCrossBgColor;
+    }
+
+    /**
+     * 设置清除按钮背景的半径
+     *
+     * @param crossRadius
+     */
+    public void setCrossRadius(int crossRadius) {
+        this.mCrossRadius = crossRadius;
+        invalidate();
+    }
+
+    public int getCrossRadius() {
+        return mCrossRadius;
+    }
+
+    /**
+     * 设置清除按钮交叉的颜色
+     *
+     * @param color
+     */
+    public void setCrossColor(int color) {
+        this.mCrossColor = color;
+        invalidate();
+    }
+
+    public int getCrossColor() {
+        return this.mCrossColor;
+    }
+
+    /**
+     * 设置交叉的长度（相对于半径）
+     *
+     * @param crossLength
+     */
+    public void setCrossLength(int crossLength) {
+        this.mCrossLength = crossLength;
+        invalidate();
+    }
+
+    public int getCrossLength() {
+        return this.mCrossLength;
+    }
+
+    /**
+     * 设置交叉的宽度
+     *
+     * @param crossSize
+     */
+    public void setCrossSize(int crossSize) {
+        this.mCrossSize = crossSize;
+        invalidate();
+    }
+
+    public int getCrossSize() {
+        return this.mCrossSize;
+    }
+
+    /**
+     * 设置清除按钮X/Y方向的偏移量
+     *
+     * @param offsetX
+     * @param offsetY
+     */
+    public void setOffset(int offsetX, int offsetY) {
+        this.mOffsetX = offsetX;
+        this.mOffsetY = offsetY;
+        setUpdate();
+    }
+
+    public int getOffsetX() {
+        return this.mOffsetX;
+    }
+
+    public int getOffsetY() {
+        return this.mOffsetY;
     }
 
     // endregion -------------------------------
