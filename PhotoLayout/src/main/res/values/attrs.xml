@@ -8,6 +8,11 @@
         <attr name="photoClickDarken" format="boolean" />
         <!-- 单张图片的时候，长宽的最大值同父布局的比例 -->
         <attr name="singlePhotoRatio" format="float" />
+        <!-- 九宫格/四宫格 -->
+        <attr name="photoLayoutType" format="enum">
+            <enum name="nine" value="0" />
+            <enum name="four" value="1" />
+        </attr>
     </declare-styleable>
 
     <declare-styleable name="TakePhotoLayout">

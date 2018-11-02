@@ -19,6 +19,16 @@ import java.util.List;
  */
 public class NinePhotoLayout extends FrameLayout {
 
+    /**
+     * 九宫格
+     */
+    private static final int LAYOUT_TYPE_NINE = 0;
+    /**
+     * 四宫格
+     */
+    private static final int LAYOUT_TYPE_FOUR = 1;
+
+
     private int mItemSpan = 2;
 
     private int mItemSize;
@@ -47,6 +57,11 @@ public class NinePhotoLayout extends FrameLayout {
      */
     private int maxSize = 0;
 
+    /**
+     * 图片布局
+     */
+    private int mLayoutType = LAYOUT_TYPE_NINE;
+
     public NinePhotoLayout(Context context) {
         this(context, null);
     }
@@ -62,6 +77,7 @@ public class NinePhotoLayout extends FrameLayout {
         mItemSpan = typedArray.getDimensionPixelSize(R.styleable.NinePhotoLayout_photoSpanSize, 2);
         photoClickDarken = typedArray.getBoolean(R.styleable.NinePhotoLayout_photoClickDarken, true);
         mChildMaxRatio = typedArray.getFloat(R.styleable.NinePhotoLayout_singlePhotoRatio, 0.6f);
+        mLayoutType = typedArray.getInt(R.styleable.NinePhotoLayout_photoLayoutType, LAYOUT_TYPE_NINE);
         typedArray.recycle();
 
         mUrls = new ArrayList<>();
@@ -100,7 +116,18 @@ public class NinePhotoLayout extends FrameLayout {
         int rowCount = getRowCount();
 
         // 计算高度
-        int height = rowCount * mItemSize + (rowCount - 1) * mItemSpan + getPaddingBottom() + getPaddingTop();
+        int height = 0;
+        if (mLayoutType == LAYOUT_TYPE_NINE) {
+            height = rowCount * mItemSize + (rowCount - 1) * mItemSpan + getPaddingBottom() + getPaddingTop();
+        } else if (mLayoutType == LAYOUT_TYPE_FOUR) {
+            if (getChildCount() <= 0) {
+                height = 0;
+            } else if (getChildCount() < 3) {
+                height = mItemSize + getPaddingTop() + getPaddingBottom();
+            } else {
+                height = mItemSize * 2 + mItemSpan + getPaddingTop() + getPaddingBottom();
+            }
+        }
 
         int childCount = getChildCount();
 
@@ -162,6 +189,15 @@ public class NinePhotoLayout extends FrameLayout {
             endY = endY > bottom - getPaddingBottom() ? bottom - getPaddingBottom() : endY;
 
             view.layout(startX, startY, endX, endY);
+
+            if (mLayoutType == LAYOUT_TYPE_FOUR && i == 1) {
+                startX = getPaddingLeft();
+                startY += mItemSize + mItemSpan;
+                continue;
+            } else if (mLayoutType == LAYOUT_TYPE_FOUR && i == 2) {
+                startX += mItemSize + mItemSpan;
+                continue;
+            }
 
             if (childCount == 4 && i == 1) {
                 startX = getPaddingLeft();
@@ -368,6 +404,16 @@ public class NinePhotoLayout extends FrameLayout {
         }
     }
 
+    /**
+     * 设置布局类型
+     *
+     * @param layoutType
+     */
+    public void setLayoutType(LayoutType layoutType) {
+        this.mLayoutType = layoutType.getType();
+        requestLayout();
+    }
+
     // region ------------------ 点击事件回调监听 -----------------------
 
     private OnItemClickListener mOnItemClickListener;
@@ -383,4 +429,21 @@ public class NinePhotoLayout extends FrameLayout {
     }
 
     // endregion --------------------------------------------------------
+
+    public enum LayoutType {
+
+        FOUR(NinePhotoLayout.LAYOUT_TYPE_FOUR),
+        NINE(NinePhotoLayout.LAYOUT_TYPE_NINE);
+
+        int type;
+
+        LayoutType(int type) {
+            this.type = type;
+        }
+
+        public int getType() {
+            return type;
+        }
+    }
+
 }
