@@ -10,7 +10,7 @@
 
 
 ### 引用方式
-> compile 'com.hewenyu:PhotoLayout:1.1'
+> compile 'com.hewenyu:PhotoLayout:1.1.1'
 
 ### NinePhotoLayout
 
@@ -141,5 +141,7 @@ mTakePhoto.getPhotos();
     <attr name="plOffsetX" format="dimension|reference" />
     <!-- 清除按钮圆心在Y轴上的偏移量 -->
     <attr name="plOffsetY" format="dimension|reference" />
+    <!-- 控件的宽度是否跟着图片的数量变化 -->
+    <attr name="plAutoWidth" format="boolean" />
 </declare-styleable>
 ```

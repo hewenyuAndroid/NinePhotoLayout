@@ -44,7 +44,7 @@ def libName = "PhotoLayout"
 //compile引用时的第1部分
 group = "com.hewenyu"
 // 版本号，//compile引用时的最后部分项目名，下次更新是只需要更改版本号即可
-version = "1.1"
+version = "1.1.1"
 //上面配置后上传至JCenter后的编译路径是这样的： compile 'com.hewenyu:PhotoLayout:1.0'
 
 //生成源文件
