@@ -120,6 +120,11 @@ public class TakePhotoLayout extends ViewGroup {
      */
     private int mTouchIndex = INVALID_EVENT;
 
+    /**
+     * 控件的宽度是否跟着图片的数量变化（不满一行时有效）
+     */
+    private boolean mAutoWidth;
+
     public TakePhotoLayout(Context context) {
         this(context, null);
     }
@@ -150,6 +155,7 @@ public class TakePhotoLayout extends ViewGroup {
         mCrossColor = array.getColor(R.styleable.TakePhotoLayout_plCrossColor, Color.WHITE);
         mOffsetX = array.getDimensionPixelSize(R.styleable.TakePhotoLayout_plOffsetX, 0);
         mOffsetY = array.getDimensionPixelSize(R.styleable.TakePhotoLayout_plOffsetY, 0);
+        mAutoWidth = array.getBoolean(R.styleable.TakePhotoLayout_plAutoWidth, false);
         array.recycle();
 
         init();
@@ -237,7 +243,7 @@ public class TakePhotoLayout extends ViewGroup {
         }
 
         // 如果图片没有超过一行，则父控件缩小
-        if (childCount < mColumn) {
+        if (mAutoWidth && childCount < mColumn) {
             w = childCount * mItemSize + getPaddingLeft() + getPaddingRight() + (childCount - 1) * mItemSpan;
         }
 

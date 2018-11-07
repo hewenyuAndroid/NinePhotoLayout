@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:background="#EBEBEB"
         android:padding="15dp"
+        app:plAutoWidth="true"
         app:plColumn="3"
         app:plCrossBgColor="#FF0000"
         app:plCrossLength="5dp"
