@@ -99,7 +99,10 @@ public class NinePhotoLayout extends FrameLayout {
                 imageView.setRatioMaxSize(maxSize);
                 super.onMeasure(childMeasureSpec, childMeasureSpec);
 
-                setMeasuredDimension(view.getMeasuredWidth() + getPaddingLeft() + getPaddingRight(),
+                // 如果是要宽度缩放，则使用此值设置为宽度
+                int scaleWidth = view.getMeasuredWidth() + getPaddingLeft() + getPaddingRight();
+
+                setMeasuredDimension(MeasureSpec.getSize(widthMeasureSpec),
                         view.getMeasuredHeight() + getPaddingTop() + getPaddingBottom());
             } else {
                 super.onMeasure(widthMeasureSpec, heightMeasureSpec);

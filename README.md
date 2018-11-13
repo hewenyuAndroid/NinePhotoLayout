@@ -10,7 +10,7 @@
 
 
 ### 引用方式
-> compile 'com.hewenyu:PhotoLayout:1.1.1'
+> compile 'com.hewenyu:PhotoLayout:1.1.2'
 
 ### NinePhotoLayout
 
